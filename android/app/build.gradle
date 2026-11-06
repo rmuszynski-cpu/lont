@@ -1,0 +1,40 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'pl.lont'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'pl.lont.game'
+        minSdk 26
+        targetSdk 34
+        versionCode (System.getenv('GITHUB_RUN_NUMBER') ?: '1').toInteger() // każdy build na GitHubie jest „nowszy”
+        versionName '1.0'
+    }
+
+    // Stały klucz podpisu: dzięki niemu kolejne wersje aplikacji instalują się na starą bez odinstalowywania.
+    // To zwykły klucz „debug” (hasło: android) do własnego użytku, nie do sklepu Google Play.
+    signingConfigs {
+        debug {
+            storeFile file('lont-debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+        encoding 'UTF-8'
+    }
+}
+// Brak zewnętrznych zależności: cała gra to kod w tym projekcie i jedna strona HTML w assets.

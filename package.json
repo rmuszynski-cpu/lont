@@ -1,0 +1,14 @@
+{
+  "name": "lont",
+  "version": "1.0.0",
+  "description": "Lont – kooperacyjna gra na telefony po WiFi: jedna osoba rozbraja bombę, reszta czyta instrukcję.",
+  "private": true,
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/*.test.js",
+    "sync-android": "node scripts/sync-android.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

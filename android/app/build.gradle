@@ -2,6 +2,9 @@ plugins {
     id 'com.android.application'
 }
 
+// Numer builda z GitHuba: każda kolejna wersja jest „nowsza” i instaluje się na starą. Lokalnie: 1.
+def runNumber = System.getenv('GITHUB_RUN_NUMBER')
+
 android {
     namespace 'pl.lont'
     compileSdk 34
@@ -10,7 +13,7 @@ android {
         applicationId 'pl.lont.game'
         minSdk 26
         targetSdk 34
-        versionCode (System.getenv('GITHUB_RUN_NUMBER') ?: '1').toInteger() // każdy build na GitHubie jest „nowszy”
+        versionCode(runNumber ? runNumber.toInteger() : 1)
         versionName '1.0'
     }
 
@@ -34,7 +37,6 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
-        encoding 'UTF-8'
     }
 }
 // Brak zewnętrznych zależności: cała gra to kod w tym projekcie i jedna strona HTML w assets.
